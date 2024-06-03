@@ -9,7 +9,7 @@ public class Program
     {
         //ProductTest();
         //CategoryTest();
-        //ProductTestt();
+        ProductTestt();
 
     }
 
@@ -25,7 +25,7 @@ public class Program
     private static void ProductTest()
     {
         ProductManager productManager = new ProductManager(new EfProductDal());
-        foreach (var product in productManager.GetAllByCategoryId(2))
+        foreach (var product in productManager.GetAllByCategoryId(2).Data)
         {
             Console.WriteLine(product.ProductName);
         }
@@ -33,9 +33,18 @@ public class Program
     private static void ProductTestt()
     {
         ProductManager productManager = new ProductManager(new EfProductDal());
-        foreach (var product in productManager.GetProductDetail())
+        var result = productManager.GetProductDetail();
+        if (result.Success==true)
         {
-            Console.WriteLine(product.ProductName + " / " + product.CategoryName);
+            foreach (var product in result.Data)
+            {
+                Console.WriteLine(product.ProductName + " / " + product.CategoryName);
+            }
         }
+        else
+        {
+            Console.WriteLine(result.Message);
+        }
+        
     }
 }
