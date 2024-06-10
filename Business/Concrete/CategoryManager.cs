@@ -25,9 +25,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(), Messages.ProductListed);
         }
 
-        public IDataResult<List<Category>> GetById(int categoryId)
+        public IDataResult<Category> GetById(int categoryId)
         {
-            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(c => c.CategoryId == categoryId), Messages.ProductListed);
+            return new SuccessDataResult<Category>(_categoryDal.Get(c => c.CategoryId == categoryId), Messages.ProductListed);
         }
     }
 }
